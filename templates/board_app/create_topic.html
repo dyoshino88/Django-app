@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>掲示板を作りましょう</h2>
+<form method="POST">
+{% csrf_token %}
+{{ create_topic_form.as_p }}
+<input type = "submit" value="新規作成">
+</form>
+{% endblock %}

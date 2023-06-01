@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>掲示板を編集できます</h2>
+<form method="POST">
+{% csrf_token %}
+{{ edit_topic_form.as_p }}
+<input type = "submit" value="更新">
+</form>
+<p><a class = "navbar-brand" href="{% url 'board_app:delete_topic' id=id %}">削除</a></p>
+{% endblock %}
