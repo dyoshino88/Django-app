@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from .settings_local import *
 import os
 import django_on_heroku
 import dj_database_url
@@ -25,7 +26,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r-$$br32$yhbm*xrz+t=4x%l13x^$c@+emqebz)is#+-#=7)7t'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
