@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from .settings_local import *
 import os
 import django_on_heroku
 import dj_database_url
+import environ
+
+env = environ.Env()
+# .env内に存在しない変数を呼び出すとエラーになる
+env.read_env('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,9 +31,10 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
+SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 
-
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -153,13 +158,6 @@ AUTH_USER_MODEL = 'board.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEBUG = False
-
-try:
-    # 存在する場合、ローカルの設定読み込み
-    from .settings_local import *
-except ImportError:
-    pass
 
 if not DEBUG:
     # Heroku settings
