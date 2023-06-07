@@ -153,6 +153,6 @@ AUTH_USER_MODEL = 'board.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 try:
-    from .local_settings import *
+    from .settings_local import *
 except ImportError:
     pass
