@@ -1,0 +1,68 @@
+/* base.html */
+/* タイトル */
+.title {
+    float: left;
+    margin-left: 60px; /* タイトルの左側のスペース */
+    font-size: 40px;
+    font-weight: bold;
+}
+  
+/* ナビゲーション項目を右寄せに配置 */
+.navbar-nav {
+    margin-left: auto;
+}
+  
+/* 会員登録 */
+.registration {
+    border: 2px solid green;
+    color: green;
+    font-weight: bold;
+    border-radius: 5px; /* 枠線の角を丸くする */
+    padding: 5px 10px; /* 枠線内の余白 */
+    margin-right: 60px; /* 会員登録右側のスペース */
+}
+  
+/* 会員登録 マウスオーバー時 */
+.navbar-nav .nav-link.registration:hover {
+    color: green;
+    background-color: rgba(128, 128, 128, 0.5);
+}
+  
+/* ログイン */
+.navbar-nav .nav-link.login {
+    color: blue;
+    font-weight: bold;
+}
+  
+/* ログイン マウスオーバー時 */
+.navbar-nav .nav-link.login:hover {
+    text-decoration: underline;
+}
+  
+/* 余白 */
+.navbar-nav .nav-link:not(.login),
+.registration {
+    margin-left: 20px;
+}
+/* home.html */
+.homepage {
+    background-image: url("../bulletinboard/two-dumbells.jpg");
+    background-color: rgba(255, 255, 255, 0.5); /* 白味がかった半透明な背景色 */
+    background-blend-mode: lighten; /* 背景画像と背景色のブレンドモードを設定 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mtext {
+    font-size: 100px;
+    font-weight: bold;
+    color: black; /* テキストの色を黒に設定 */
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* テキストに影を追加 */
+}
+
+
