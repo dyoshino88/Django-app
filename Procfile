@@ -1,1 +1,1 @@
-web: gunicorn config.wsgi:application --preload
+web: gunicorn config.wsgi:application --preload --log-file -
