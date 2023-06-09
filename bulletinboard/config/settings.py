@@ -89,7 +89,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'bulletinboard.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -107,7 +107,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bulletinboard.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
