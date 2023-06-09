@@ -1,1 +1,1 @@
-web: gunicorn config.wsgi:application --log-file -
+web: gunicorn config.wsgi:application --preload -b 0.0.0.0:5000
