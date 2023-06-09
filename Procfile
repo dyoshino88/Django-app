@@ -1,1 +1,1 @@
-web: gunicorn bulletinboard.bulletinboard.wsgi:application --log-file -
+web: gunicorn bulletinboard.wsgi:application --log-file -
