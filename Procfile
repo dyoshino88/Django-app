@@ -1,1 +1,1 @@
-web: gunicorn -k uvicorn.workers.UvicornWorker config.wsgi:application
+web: gunicorn config.wsgi:application --log-file -
