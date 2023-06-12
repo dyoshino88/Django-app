@@ -32,7 +32,7 @@
 $("#save_text").click(function(){
   var text = $("#id_text").val();
   $.ajax({
-    url: "{% url 'board_app:save_text' %}",
+    url: "{% url 'board:save_text' %}",
     type: "GET",
     data: {text: text, topic_id: "{{ topic.id }}"},
     dataType: "json",

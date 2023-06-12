@@ -14,7 +14,7 @@
 <div class="collapse navbar-collapse">
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'board_app:list_topics' %}">掲示板一覧</a>
+      <a class="nav-link" href="{% url 'board:list_topics' %}">掲示板一覧</a>
     </li>
     {% if user.is_authenticated %} 
     <li class="nav-item">

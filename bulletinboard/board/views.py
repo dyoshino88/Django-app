@@ -14,9 +14,9 @@ def create_topic(request):
     create_topic_form.instance.user = request.user
     create_topic_form.save()
     messages.success(request, '掲示板が作成されました')
-    return redirect('board_app:list_topics')
+    return redirect('board:list_topics')
   return render(
-    request, 'board_app/create_topic.html', context={
+    request, 'board/create_topic.html', context={
       'create_topic_form': create_topic_form,
     }
   )
@@ -24,7 +24,7 @@ def create_topic(request):
 def list_topics(request): 
   topics = Topics.objects.pick_all_topics()
   return render(
-    request, 'board_app/list_topics.html', context={
+    request, 'board/list_topics.html', context={
       'topics': topics
     }
   )
@@ -37,9 +37,9 @@ def edit_topic(request, id):
   if edit_topic_form.is_valid():
     edit_topic_form.save()
     messages.success(request, '掲示板が更新されました')
-    return redirect('board_app:list_topics')
+    return redirect('board:list_topics')
   return render(
-    request, 'board_app/edit_topic.html', context={
+    request, 'board/edit_topic.html', context={
       'edit_topic_form': edit_topic_form,
       'id': id,
     }
@@ -53,9 +53,9 @@ def delete_topic(request, id):
   if delete_topic_form.is_valid():
     topic.delete()
     messages.success(request, '掲示板が削除されました')
-    return redirect('board_app:list_topics')
+    return redirect('board:list_topics')
   return render(
-    request, 'board_app/delete_topic.html', context={
+    request, 'board/delete_topic.html', context={
       'delete_topic_form': delete_topic_form
     }
   )
@@ -72,9 +72,9 @@ def post_texts(request, topic_id):
     post_text_form.instance.user = request.user
     post_text_form.save()
     cache.delete(f'saved_text-topic_id={topic_id}-user_id={request.user.id}')
-    return redirect('board_app:post_texts', topic_id=topic_id)
+    return redirect('board:post_texts', topic_id=topic_id)
   return render(
-    request, 'board_app/post_texts.html', context={
+    request, 'board/post_texts.html', context={
       'post_text_form': post_text_form,
       'topic': topic,
       'texts': texts,
