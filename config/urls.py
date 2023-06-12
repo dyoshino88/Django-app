@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings 
 from django.conf.urls.static import static
-from bulletinboard.board.views import error_page
+from bulletinboard.accounts.views import error_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),

@@ -63,7 +63,7 @@ else:
 
 INSTALLED_APPS = [
     # Use WhiteNoise's runserver implementation instead of the Django default, for dev-prod parity.
-    'board.apps.BoardConfig',
+    'accounts',
     'board_app.apps.BoardAppConfig',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
@@ -202,7 +202,7 @@ WHITENOISE_KEEP_ONLY_HASHED_FILES = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-AUTH_USER_MODEL = 'board.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # Default primary key field type

@@ -10,7 +10,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand title" href="{% url 'board:home' %}">ダンベル交換所</a>
+<a class="navbar-brand title" href="{% url 'accounts:home' %}">ダンベル交換所</a>
 <div class="collapse navbar-collapse">
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">
@@ -18,17 +18,17 @@
     </li>
     {% if user.is_authenticated %} 
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'board:logout_page' %}">ログアウト</a>
+      <a class="nav-link" href="{% url 'accounts:logout_page' %}">ログアウト</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'board:edit_page' %}">アカウント情報の変更</a> 
+      <a class="nav-link" href="{% url 'accounts:edit_page' %}">アカウント情報の変更</a> 
     </li>
     {% else %}
     <li class="nav-item">
-      <a class="nav-link login" href="{% url 'board:login_page' %}">ログイン</a>
+      <a class="nav-link login" href="{% url 'accounts:login_page' %}">ログイン</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link registration" href="{% url 'board:registration' %}">会員登録</a>
+      <a class="nav-link registration" href="{% url 'accounts:registration' %}">会員登録</a>
     </li>
     {% endif %}
   </ul>

@@ -9,7 +9,7 @@ from django.contrib.auth import update_session_auth_hash
 
 def home(request):
   return render(
-    request, 'board/home.html'
+    request, 'accounts/home.html'
   )
   
 def registration(request):
@@ -17,11 +17,11 @@ def registration(request):
   if registration_form.is_valid():
     try:
       registration_form.save()
-      return redirect('board:home')
+      return redirect('accounts:home')
     except ValidationError as e:
       registration_form.add_error('password', e) 
   return render(
-    request, 'board/registration.html', context={
+    request, 'accounts/registration.html', context={
       'registration_form':registration_form,
     }
   )
@@ -29,7 +29,7 @@ def registration(request):
 def active_user(request, token):
   user_active_token = UserActiveTokens.objects.active_user_using_token(token) 
   return render(
-    request, 'board/active_user.html'
+    request, 'accounts/active_user.html'
   )
 
 def login_page(request): 
@@ -42,13 +42,13 @@ def login_page(request):
       if r_user.is_active:
         login(request,r_user)
         messages.success(request, 'ログインに成功しました')
-        return redirect('board:home')
+        return redirect('accounts:home')
       else:
         messages.warning(request, 'user is not valid')
     else:
       messages.warning(request, 'メールアドレスまたはパスワードが違います')
   return render(
-    request, 'board/login_page.html', context={
+    request, '/login_page.html', context={
       'login_form':login_form,
     }
   )
@@ -57,7 +57,7 @@ def login_page(request):
 def logout_page(request):
   logout(request)
   messages.success(request, 'ログアウトしました')
-  return redirect('board:home')
+  return redirect('accounts:home')
 
 @login_required 
 def edit_page(request):
@@ -69,7 +69,7 @@ def edit_page(request):
   if edit_form.is_valid():
     messages.success(request, '更新されました')
     edit_form.save()
-  return render(request, 'board/edit_page.html', context={
+  return render(request, 'accounts/edit_page.html', context={
       'edit_form': edit_form,
   })
   
@@ -84,7 +84,7 @@ def change_password(request):
     except ValidationError as e:
       change_password_form.add_error('password', e)
   return render(
-    request, 'board/change_password.html', context={
+    request, 'accounts/change_password.html', context={
       'change_password_form': change_password_form,
     }
   )
