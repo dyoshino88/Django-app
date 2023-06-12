@@ -63,6 +63,8 @@ else:
 
 INSTALLED_APPS = [
     # Use WhiteNoise's runserver implementation instead of the Django default, for dev-prod parity.
+    'board.apps.BoardConfig',
+    'board_app.apps.BoardAppConfig',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -70,8 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'board',
-    'board_app',
+    
 ]
 
 MIDDLEWARE = [
