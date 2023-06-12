@@ -22,8 +22,8 @@ from bulletinboard.board.views import error_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('bulletinboard/board/', include('board.urls')),
-    path('bulletinboard/board_app/', include('board_app.urls')),
+    path('board/', include('board.urls')),
+    path('board_app/', include('board_app.urls')),
 ]
 handler404 = error_page
 
