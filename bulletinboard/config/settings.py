@@ -109,7 +109,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bulletinboard.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
