@@ -15,7 +15,7 @@ import os
 import secrets
 from pathlib import Path
 import dj_database_url
-import django_on_heroku
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -90,7 +90,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'config.urls'
+ROOT_URLCONF = 'bulletinboard.urls'
 
 TEMPLATES = [
     {
@@ -108,7 +108,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bulletinboard.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
