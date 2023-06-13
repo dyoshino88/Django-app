@@ -19,7 +19,7 @@ import django_on_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 
 
@@ -65,7 +65,6 @@ INSTALLED_APPS = [
     # Use WhiteNoise's runserver implementation instead of the Django default, for dev-prod parity.
     'accounts',
     'board',
-    'config',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -91,7 +90,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'bulletinboard.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
