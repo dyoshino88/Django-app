@@ -6,7 +6,7 @@
 
 # DEMO
 
-![TOPページ]https://imgur.com/HmSBspO
+![two-dumbells-slider](https://github.com/dyoshino88/Django-app/assets/130971236/39053698-1194-4696-b763-6f0b181a8963)
 
 # Features
 
