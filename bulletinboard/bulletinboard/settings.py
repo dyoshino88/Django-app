@@ -108,7 +108,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'bulletinboard.wsgi.application'
+WSGI_APPLICATION = 'bulletinboard.bulletinboard.wsgi.application'
 
 
 # Database
