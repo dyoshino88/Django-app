@@ -1,1 +1,1 @@
-web: gunicorn --chdir bulletinboard bulletinboard.wsgi
+web: gunicorn --chdir bulletinboard config.wsgi
