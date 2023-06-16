@@ -4,7 +4,7 @@
 
 # DEMO
 
-![two-dumbells-slider](https://github.com/dyoshino88/Django-app/assets/130971236/39053698-1194-4696-b763-6f0b181a8963)
+![スクリーンショット 2023-06-16 140331](https://github.com/dyoshino88/Django-app/assets/130971236/5c76b66f-e18e-4f18-aa07-43a62f4461ad)
 
 # Features
 ダンベルをユーザー間で交換できる掲示板<br>
