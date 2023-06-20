@@ -48,7 +48,7 @@ def login_page(request):
     else:
       messages.warning(request, 'メールアドレスまたはパスワードが違います')
   return render(
-    request, '/login_page.html', context={
+    request, 'accounts:login_page.html', context={
       'login_form':login_form,
     }
   )
