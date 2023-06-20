@@ -12,6 +12,9 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand title" href="{% url 'accounts:home' %}">ダンベル交換所</a>
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'board:list_topics' %}">掲示板一覧</a>
+</li>
 <div class="collapse navbar-collapse">
   <ul class="navbar-nav ml-auto">
     {% if user.is_authenticated %} 
@@ -22,9 +25,6 @@
       <a class="nav-link" href="{% url 'accounts:edit_page' %}">アカウント情報の変更</a> 
     </li>
     {% else %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'board:list_topics' %}">掲示板一覧</a>
-    </li>
     <li class="nav-item">
       <a class="nav-link login" href="{% url 'accounts:login_page' %}">ログイン</a>
     </li>
