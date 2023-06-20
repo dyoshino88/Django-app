@@ -12,11 +12,11 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <a class="navbar-brand title" href="{% url 'accounts:home' %}">ダンベル交換所</a>
-<li class="nav-item">
-  <a class="nav-link" href="{% url 'board:list_topics' %}">掲示板一覧</a>
-</li>
 <div class="collapse navbar-collapse">
   <ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'board:list_topics' %}">掲示板一覧</a>
+    </li>
     {% if user.is_authenticated %} 
     <li class="nav-item">
       <a class="nav-link" href="{% url 'accounts:logout_page' %}">ログアウト</a>
