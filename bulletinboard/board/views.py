@@ -24,7 +24,7 @@ def create_topic(request):
 def list_topics(request): 
   topics = Topics.objects.pick_all_topics()
   return render(
-    request, 'board/list_topics.html', context={
+    request, 'board:list_topics.html', context={
       'topics': topics
     }
   )
