@@ -24,7 +24,7 @@
     <td> Python </td> <td>書きやすい、ライブラリが豊富、機械学習に興味があった</td>
   </tr>
   <tr>
-    <td> HEROKU </td> <td>サーバー</td>
+    <td> HEROKU </td> <td>Paas</td>
   </tr>
   <tr>
     <td> PostgreSQL </td> <td>HEROKUPostgreSを設定する必要があった</td>
