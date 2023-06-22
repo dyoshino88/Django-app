@@ -2,19 +2,17 @@
 {% block content %}
 {% if messages %}
   {% for message in messages %}
-  <div>{{ message.message }}</div>
+<div xmlns="">{{ message.message }}</div>
   {% endfor %}
 {% endif %}
 <h2>page for board list</h2>
 <p><a class="navbar-brand" href="{% url 'board:create_topic' %}">新しい掲示板を作る</a></p>
 <table class="table table-striped table-hover">
-  <thread>
     <tr>
       <th>No.</th>
       <th>タイトル</th>
       <th>投稿者</th>
     </tr>
-  </thread>
   <tbody>
   {% for topic in topics %}
     <tr>
