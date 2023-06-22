@@ -27,7 +27,7 @@
     <td> HEROKU </td> <td>gitと連携でき自動デプロイ可能、コンテナ（Dyno）でOS、サーバ、DBの機能を一括で提供してくれる</td>
   </tr>
   <tr>
-    <td> PostgreSQL </td> <td>DB設定はHeroku Postgresが推奨されていた</td>
+    <td> PostgreSQL </td> <td>DB設定はHeroku Postgres経由</td>
   </tr>
   <tr>
     <td> HTML </td> <td>WEBアプリには必須</td>
