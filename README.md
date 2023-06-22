@@ -24,10 +24,10 @@
     <td> Python </td> <td>書きやすい、ライブラリが豊富、機械学習に興味があった</td>
   </tr>
   <tr>
-    <td> HEROKU </td> <td>Paas</td>
+    <td> HEROKU </td> <td>gitと連携でき自動デプロイ可能、コンテナ（Dyno）でOS、サーバ、DBの機能を一括で提供してくれる</td>
   </tr>
   <tr>
-    <td> PostgreSQL </td> <td>HEROKUPostgreSを設定する必要があった</td>
+    <td> PostgreSQL </td> <td>DB設定はHeroku Postgresが推奨されていた</td>
   </tr>
   <tr>
     <td> HTML </td> <td>WEBアプリには必須</td>
