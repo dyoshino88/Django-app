@@ -10,8 +10,26 @@
 ダンベルをユーザー間で交換できる掲示板<br>
 ジモティーではアイテム数が多く探しにくさを感じ、簡易版として作成<br>
 差別点：「ダンベル」「交換」に特化しているため探しやすい、決済トラブルがない<br>
-技術選定：Django,Python,html,css<br>
-技術選定理由：Python
+<table>
+  <caption>技術選定と選定理由</caption>
+  <thead>
+    <tr>
+      <th>技術</th> <th>選定理由</th>
+    </tr>
+  </thead>
+  <tr>
+    <td> Django </td> <td>ユーザー認証、セキュリティ面、フルスタック</td>
+  </tr>
+  <tr>
+    <td> Python </td> <td>書きやすい、ライブラリが豊富、機械学習に興味があった</td>
+  </tr>
+  <tr>
+    <td> HTML </td> <td>WEBアプリには必須</td>
+  </tr>
+  <tr>
+    <td> CSS </td> <td>HTMLと同様</td>
+  </tr>
+</table>
 
 # Requirement
 
