@@ -9,7 +9,7 @@ class Topics(models.Model):
 
   title = models.CharField(max_length=100)
   user = models.ForeignKey(
-    'board.User', on_delete=models.CASCADE
+    'accounts.User', on_delete=models.CASCADE
   )
   
   objects = TopicsManager()
@@ -25,7 +25,7 @@ class Texts(models.Model):
 
   text = models.CharField(max_length=500)
   user = models.ForeignKey(
-    'board.User', on_delete=models.CASCADE
+    'accounts.User', on_delete=models.CASCADE
   )
   topic = models.ForeignKey(
     'Topics', on_delete=models.CASCADE
