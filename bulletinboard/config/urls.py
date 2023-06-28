@@ -23,7 +23,7 @@ from accounts.views import error_page
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('user-accounts/', include('accounts.urls')),
     path('board/', include('board.urls')),
 ]
 handler404 = error_page
