@@ -12,7 +12,7 @@ from django.contrib.auth.models import UserManager
 class User(AbstractBaseUser, PermissionsMixin):
   username = models.CharField(max_length=100)
   email = models.EmailField(max_length=100, unique=True)
-  date_of_birth = models.DateField()
+  date_of_birth = models.DateField(null=True)
   is_active = models.BooleanField(default=False)
   is_staff = models.BooleanField(default=False)
   picture = models.FileField(null=True, upload_to='picture/')
