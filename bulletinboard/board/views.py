@@ -81,7 +81,7 @@ def post_texts(request, topic_id):
     }
   )
 
-def save_text(request):
+def save_text(request: HttpRequest):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         text = request.GET.get('text')
         topic_id = request.GET.get('topic_id')
