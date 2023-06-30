@@ -4,7 +4,7 @@
 
 # DEMO
 
-![スクリーンショット 2023-06-16 140331](https://github.com/dyoshino88/Django-app/assets/130971236/5c76b66f-e18e-4f18-aa07-43a62f4461ad)
+![スクリーンショット 2023-06-30 155302](https://github.com/dyoshino88/Django-app/assets/130971236/821c04cd-5d0e-4ced-9a98-d11b6716cfea)
 
 # Features
 ダンベルをユーザー間で交換できる掲示板<br>
