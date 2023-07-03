@@ -124,7 +124,7 @@ if IS_HEROKU_APP:
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
          'NAME': 'my_database',
-         'USER': 'dyoshino88',
+         'USER': 'yoshinodaisuke',
          'PASSWORD': 'dy080804',
          'HOST': 'localhost',
          'PORT': '5432',
