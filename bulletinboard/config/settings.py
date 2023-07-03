@@ -126,7 +126,7 @@ if IS_HEROKU_APP:
          'NAME': 'my_database',
          'USER': 'yoshinodaisuke',
          'PASSWORD': 'dy080804',
-         'HOST': 'localhost',
+         'HOST': 'local socket',
          'PORT': '5432',
      }
  }
