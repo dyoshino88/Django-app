@@ -126,7 +126,7 @@ if IS_HEROKU_APP:
          'NAME': 'HEROKU_POSTGRESQL_RED_URL',
          'USER': 'yoshinodaisuke',
          'PASSWORD': 'dy080804',
-         'HOST': 'local socket',
+         'HOST': 'localhost',
          'PORT': '5432',
      }
  }
