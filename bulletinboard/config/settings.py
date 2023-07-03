@@ -123,7 +123,7 @@ if IS_HEROKU_APP:
     DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': 'my_database',
+         'NAME': 'HEROKU_POSTGRESQL_RED_URL',
          'USER': 'yoshinodaisuke',
          'PASSWORD': 'dy080804',
          'HOST': 'local socket',
