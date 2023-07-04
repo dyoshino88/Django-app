@@ -123,10 +123,10 @@ if IS_HEROKU_APP:
     DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': 'HEROKU_POSTGRESQL_RED_URL',
-         'USER': 'yoshinodaisuke',
-         'PASSWORD': 'dy080804',
-         'HOST': 'localhost',
+         'NAME': 'dfdn2amletlre0',
+         'USER': 'fqikevlhrajbxj',
+         'PASSWORD': 'edfba56bb8952b71b0eacda543506e5615d776584501d0eaef329fee27d60c1b',
+         'HOST': 'ec2-18-211-172-50.compute-1.amazonaws.com',
          'PORT': '5432',
      }
  }
