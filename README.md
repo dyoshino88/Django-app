@@ -80,3 +80,5 @@
 
 # License
 
+# メモ
+7月5日　：　git push heroku mainはできた。heroku run python manage.py makemigrationsができない。No such file or directoryとなる。heroku run pwdとすると/appとなる
