@@ -120,16 +120,6 @@ if IS_HEROKU_APP:
     # automatically by Heroku when a database addon is attached to your Heroku app. See:
     # https://devcenter.heroku.com/articles/provisioning-heroku-postgres
     # https://github.com/jazzband/dj-database-url
-#     DATABASES = {
-#      'default': {
-#          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#          'NAME': 'dfdn2amletlre0',
-#          'USER': 'auvltqtstddzkn',
-#          'PASSWORD': '9afbc491b508ef17c114665448531459a359b9c7ba23ad025bca7fc8bee09421',
-#          'HOST': 'ec2-18-211-172-50.compute-1.amazonaws.com',
-#          'PORT': '5432',
-#      }
-#  }
     DATABASES = {
         "default": dj_database_url.config(
             conn_max_age=600,
