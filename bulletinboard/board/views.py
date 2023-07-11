@@ -15,15 +15,11 @@ def create_topic(request):
     create_topic_form.save()
     messages.success(request, '掲示板が作成されました')
     return redirect('board:list_topics')
-  else :
-    # 0711追加
-    messages.error(request, 'ログイン後、掲示板を作成できます')
-    return render(
+  return render(
     request, 'board/create_topic.html', context={
       'create_topic_form': create_topic_form,
     }
   )
-    
 
 def list_topics(request): 
   topics = Topics.objects.pick_all_topics()
