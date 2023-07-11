@@ -42,6 +42,8 @@ def login_page(request):
       if r_user.is_active:
         login(request,r_user)
         messages.success(request, 'ログインに成功しました')
+        # セッションの追加テスト
+        request.session['add_session'] = 'セッション追加'
         return redirect('accounts:home')
       else:
         messages.warning(request, 'user is not valid')

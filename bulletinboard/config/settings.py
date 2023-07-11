@@ -215,3 +215,4 @@ AUTH_USER_MODEL = 'accounts.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['https://dkoukan.com']
 
+
