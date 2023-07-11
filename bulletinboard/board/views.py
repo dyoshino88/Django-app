@@ -35,13 +35,6 @@ def edit_topic(request, id):
     raise Http404
   edit_topic_form = forms.CreateTopicForm(request.POST or None, instance=topic)
   if edit_topic_form.is_valid():
-    # セッションデータの取得
-    session_data = request.session.get('add_session')
-    # セッションの有無を確認
-    if 'add_session' in request.session:
-      print('セッション名add_sessionは存在します')
-    else :
-      print('セッション名add_sessionは存在しません')
     edit_topic_form.save()
     messages.success(request, '掲示板が更新されました')
     return redirect('board:list_topics')
@@ -97,6 +90,3 @@ def save_text(request: HttpRequest):
             return JsonResponse({'message': '投稿が一時保存されました'})
     return JsonResponse({}, status=400)
 
-
-  
-# Create your views here.
