@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>掲示板を作りましょう</h2>
+{% comment %} 0711追加 {% endcomment %}
+{% if messages %} 
+  {% for message in messages %}
+    <div>{{ message.message }}</div>
+  {% endfor %}
+{% endif %}
+{% comment %} 0711追加ここまで {% endcomment %}
 <form method="POST">
 {% csrf_token %}
 {{ create_topic_form.as_p }}
