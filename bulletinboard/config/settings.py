@@ -14,13 +14,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import secrets
 from pathlib import Path
+import environ
 import dj_database_url
-
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
+env = environ.Env()
+env.read_env(os.path.join(BASE_DIR, '.env'))
 
 
 # Before using your Heroku app in production, make sure to review Django's deployment checklist:
@@ -215,4 +218,20 @@ AUTH_USER_MODEL = 'accounts.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['https://dkoukan.com']
 
+# メール設定
+# SendGridを使用
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+# 送信元メールアドレス
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+# SendGridのAPIキー
+SENDGRID_API_KEY = env('SENDGRID_API_KEY')
 
+# ローカル用
+# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+# 本番環境用
+SENDGRID_SANDBOX_MODE_IN_DEBUG = True
+
+# URLのトラッキングをOFF
+SENDGRID_TRACK_CLICKS_PLAIN = False
+# ターミナルに表示
+SENDGRID_ECHO_TO_STDOUT = True
