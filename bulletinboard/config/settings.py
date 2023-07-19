@@ -14,7 +14,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import secrets
 from pathlib import Path
-# import environ
 import dj_database_url
 
 
@@ -219,19 +218,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['https://dkoukan.com']
 
 # メール設定
-# # SendGridを使用
-# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-# # 送信元メールアドレス
-# DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
-# # SendGridのAPIキー
-# SENDGRID_API_KEY = env('SENDGRID_API_KEY')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #メール送信
+DEFAULT_FROM_EMAIL = 'yoshino0707dh@gmail.com' 
+#SendGrid設定
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
-# # ローカル用
-# # SENDGRID_SANDBOX_MODE_IN_DEBUG = False
-# # 本番環境用
-# SENDGRID_SANDBOX_MODE_IN_DEBUG = True
+if IS_HEROKU_APP:
+    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_API_KEY']
+    
 
-# # URLのトラッキングをOFF
-# SENDGRID_TRACK_CLICKS_PLAIN = False
-# # ターミナルに表示
-# SENDGRID_ECHO_TO_STDOUT = True

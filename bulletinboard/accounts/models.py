@@ -56,7 +56,8 @@ def publish_token(sender, instance, **kwargs):
     expired_time=datetime.now() + timedelta(hours=5)
   )
   # メールでURLを送る
-  print(f'http://127.0.0.1:8000/accounts/active_user/{user_active_token.token}')
+  # print(f'http://127.0.0.1:8000/accounts/active_user/{user_active_token.token}')
+  from django.core.mail import send_mail
+  send_mail('Subject here', 'Here is the message.', 'yoshino0707dh@gmail.com', [f'https://dkoukan.com/accounts/active_user/{user_active_token.token}'], fail_silently=False)
 
 
-# Create your models here.
