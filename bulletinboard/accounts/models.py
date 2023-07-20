@@ -8,6 +8,8 @@ from django.dispatch import receiver
 from uuid import uuid4
 from datetime import datetime, timedelta
 from django.contrib.auth.models import UserManager
+import os
+
 
 class User(AbstractBaseUser, PermissionsMixin):
   username = models.CharField(max_length=100)
@@ -56,8 +58,14 @@ def publish_token(sender, instance, **kwargs):
     expired_time=datetime.now() + timedelta(hours=5)
   )
   # メールでURLを送る
-  # print(f'http://127.0.0.1:8000/accounts/active_user/{user_active_token.token}')
-  from django.core.mail import send_mail
-  send_mail('Subject here', 'Here is the message.', 'yoshino0707dh@gmail.com', [f'https://dkoukan.com/accounts/active_user/{user_active_token.token}'], fail_silently=False)
+  IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
+  if IS_HEROKU_APP:
+    print(f'http://127.0.0.1:8000/accounts/active_user/{user_active_token.token}')
+  else:
+    from django.core.mail import send_mail
+    send_mail('Subject here', 'Here is the message.', 'yoshino0707dh@gmail.com', [f'https://dkoukan.com/accounts/active_user/{user_active_token.token}'], fail_silently=False)
+  
+  
+  
 
 
