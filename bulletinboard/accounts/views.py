@@ -17,6 +17,7 @@ def registration(request):
   if registration_form.is_valid():
     try:
       registration_form.save()
+      messages.success(request, 'ご入力いただいたメールアドレスに本会員登録用のメールを送信しました。')
       return redirect('accounts:home')
     except ValidationError as e:
       registration_form.add_error('password', e) 
