@@ -226,7 +226,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['https://dkoukan.com']
 
 # メール設定
-SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
+SENDGRID_API_KEY = os.environ.get['SENDGRID_API_KEY']
 DEFAULT_FROM_EMAIL = 'yoshino0707dh@gmail.com' 
 
     
