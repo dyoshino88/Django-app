@@ -42,9 +42,15 @@ def login_page(request):
       if r_user.is_active:
         login(request,r_user)
         messages.success(request, 'ログインに成功しました')
-        return redirect('accounts:home')
+        if 's1' in request.session:
+          s1 = request.session['s1']
+        else:
+          s1 = 'hello'
+          request.session['s1'] = s1
+        params = {'s1': s1}
+        return render(request,'accounts/home.html', params)
       else:
-        messages.warning(request, 'user is not valid')
+        messages.warning(request, 'ユーザが無効です。')
     else:
       messages.warning(request, 'メールアドレスまたはパスワードが違います')
   return render(
