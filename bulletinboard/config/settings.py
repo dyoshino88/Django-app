@@ -238,7 +238,7 @@ if IS_HEROKU_APP:
     EMAIL_HOST_PASSWORD = os.environ['SENDGRID_API_KEY']
     
 #ログ出力先のディレクトリを設定する
-LOG_BASE_DIR = os.path.join("/var", "log", "app")
+LOG_BASE_DIR = os.path.join(BASE_DIR, "log")
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
