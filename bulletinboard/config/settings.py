@@ -226,16 +226,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['https://dkoukan.com']
 
 # メール設定
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #メール送信
+SENDGRID_API_KEY = os.environ['SENDGRID_API_KEY']
 DEFAULT_FROM_EMAIL = 'yoshino0707dh@gmail.com' 
-#SendGrid設定
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
 
-if IS_HEROKU_APP:
-    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_API_KEY']
     
     
 

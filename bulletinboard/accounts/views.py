@@ -108,61 +108,43 @@ def my_error_handler(request, *args, **kw):
   error_html = debug.technical_500_response(request, *sys.exc_info()).content
   return HttpResponse(error_html)
 
-# メール設定
+# 認証メール設定
+
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
 from django.core.mail import send_mail
-from django.http import HttpResponse
 from django.utils.timezone import datetime, timedelta
 from uuid import uuid4
-from django.contrib.auth.models import User 
 from .models import UserActiveTokens
+from django.conf import settings
+from django.http import HttpResponse
 
-def send_email_view(request):
+def user_registration_view(request):
     if request.method == 'POST':
-        # フォームから入力されたメールアドレスとユーザ名を取得
-        recipient_email = request.POST.get('email', '')
+        # フォームから入力されたデータを取得
         username = request.POST.get('username', '')
-        
-        # ユーザを作成（ユーザが存在しない場合のみ）
-        user, created = User.objects.get_or_create(username=username)
+        email = request.POST.get('email', '')
 
-        # メールを送信する
-        subject = '本会員登録のご案内'
+        # ユーザを作成 (パスワードの処理を追加することも可能)
+        user, created = User.objects.get_or_create(username=username, email=email)
+
+        # ユーザの認証トークンを作成
         user_active_token = UserActiveTokens.objects.create(
-        r_user=user, 
-        token=str(uuid4()),
-        expired_time=datetime.now() + timedelta(hours=5)
+            r_user=user,
+            token=str(uuid4()),
+            expired_time=datetime.now() + timedelta(hours=5)
         )
+
+        # 認証メールを送信
+        subject = '本会員登録のご案内'
         message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com/accounts/active_user/{user_active_token.token}'
-        from_email = 'yoshino0707dh@gmail.com'
-        recipient_list = [recipient_email]
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [email]
 
         send_mail(subject, message, from_email, recipient_list)
 
-        # メール送信後に何らかの処理を行う場合はここに追加
-
         return HttpResponse('メールを送信しました。')
     
-    # GETリクエストの場合は単にテンプレートを表示
-    return render(request, 'send_email_form.html')
-  
-  
-# views.py
+    # GETリクエストまたは不正なフォーム送信の場合
+    return render(request, 'accounts/registration.html')
 
-from django.shortcuts import render
-from .utils import send_email
-
-def send_email_view(request):
-    # 送信処理のコード
-    # ...
-
-    # メールを送信する
-    subject = '本会員登録のご案内'
-    message = '会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了します。'
-    recipient_list = ['recipient@example.com']
-
-    status_code = send_email(subject, message, recipient_list)
-
-    if status_code == 202:
-        return HttpResponse('メールを送信しました。')
-    else:
-        return HttpResponse('メールの送信に失敗しました。')
