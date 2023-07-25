@@ -99,4 +99,3 @@ def error_page(request, exception):
   return render(
     request, '404.html'
   )
-# Create your views here.
