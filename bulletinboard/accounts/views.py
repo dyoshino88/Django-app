@@ -146,3 +146,23 @@ def send_email_view(request):
     return render(request, 'send_email_form.html')
   
   
+# views.py
+
+from django.shortcuts import render
+from ..utils import send_email
+
+def send_email_view(request):
+    # 送信処理のコード
+    # ...
+
+    # メールを送信する
+    subject = '本会員登録のご案内'
+    message = '会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了します。'
+    recipient_list = ['recipient@example.com']
+
+    status_code = send_email(subject, message, recipient_list)
+
+    if status_code == 202:
+        return HttpResponse('メールを送信しました。')
+    else:
+        return HttpResponse('メールの送信に失敗しました。')
