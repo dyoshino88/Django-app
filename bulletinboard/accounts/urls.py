@@ -12,3 +12,7 @@ urlpatterns = [
   path('edit_page', views.edit_page, name='edit_page'), 
   path('change_password', views.change_password,name='change_password'),
 ]
+
+import django.conf.urls as url
+from accounts import views
+url.handler500 = views.my_error_handler
