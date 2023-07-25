@@ -65,7 +65,3 @@ def publish_token(sender, instance, **kwargs):
   #   from django.core.mail import send_mail
   #   send_mail('Subject here', 'Here is the message.', 'yoshino0707dh@gmail.com', [f'https://dkoukan.com/accounts/active_user/{user_active_token.token}'], fail_silently=False)
   # else:
-    
-    
-  
-

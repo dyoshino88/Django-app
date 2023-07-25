@@ -110,14 +110,27 @@ def my_error_handler(request, *args, **kw):
 # メール設定
 from django.core.mail import send_mail
 from django.http import HttpResponse
+from django.utils.timezone import datetime, timedelta
+from uuid import uuid4
+from django.contrib.auth.models import User 
+from .models import UserActiveTokens
 
 def send_email_view(request):
     if request.method == 'POST':
-        # フォームから入力されたメールアドレスを取得
+        # フォームから入力されたメールアドレスとユーザ名を取得
         recipient_email = request.POST.get('email', '')
+        username = request.POST.get('username', '')
+        
+        # ユーザを作成（ユーザが存在しない場合のみ）
+        user, created = User.objects.get_or_create(username=username)
 
         # メールを送信する
         subject = '本会員登録のご案内'
+        user_active_token = UserActiveTokens.objects.create(
+        r_user=user, 
+        token=str(uuid4()),
+        expired_time=datetime.now() + timedelta(hours=5)
+        )
         message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com/accounts/active_user/{user_active_token.token}'
         from_email = 'yoshino0707dh@gmail.com'
         recipient_list = [recipient_email]
@@ -130,3 +143,5 @@ def send_email_view(request):
     
     # GETリクエストの場合は単にテンプレートを表示
     return render(request, 'send_email_form.html')
+  
+  
