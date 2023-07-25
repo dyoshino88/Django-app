@@ -149,7 +149,7 @@ def send_email_view(request):
 # views.py
 
 from django.shortcuts import render
-from ..utils import send_email
+from .utils import send_email
 
 def send_email_view(request):
     # 送信処理のコード
