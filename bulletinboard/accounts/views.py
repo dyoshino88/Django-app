@@ -106,3 +106,27 @@ def my_error_handler(request, *args, **kw):
   from django.http import HttpResponse
   error_html = debug.technical_500_response(request, *sys.exc_info()).content
   return HttpResponse(error_html)
+
+# メール設定
+from django.core.mail import send_mail
+from django.http import HttpResponse
+
+def send_email_view(request):
+    if request.method == 'POST':
+        # フォームから入力されたメールアドレスを取得
+        recipient_email = request.POST.get('email', '')
+
+        # メールを送信する
+        subject = '本会員登録のご案内'
+        message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com/accounts/active_user/{user_active_token.token}'
+        from_email = 'yoshino0707dh@gmail.com'
+        recipient_list = [recipient_email]
+
+        send_mail(subject, message, from_email, recipient_list)
+
+        # メール送信後に何らかの処理を行う場合はここに追加
+
+        return HttpResponse('メールを送信しました。')
+    
+    # GETリクエストの場合は単にテンプレートを表示
+    return render(request, 'send_email_form.html')
