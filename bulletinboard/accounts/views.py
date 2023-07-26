@@ -31,7 +31,7 @@ def registration(request):
       # 認証メール送信
       subject = '本会員登録のご案内'
       message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com/accounts/active_user/{user_active_token.token}'
-      from_email = settings.DEFAULT_FORM_EMAIL
+      from_email = settings.DEFAULT_FROM_EMAIL
       recipient_list = [user.email]
       
       send_mail(subject, message, from_email, recipient_list)
