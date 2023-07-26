@@ -2,36 +2,62 @@ from django.shortcuts import render, redirect
 from . import forms
 from django.core.exceptions import ValidationError
 from .models import UserActiveTokens
-from django.contrib.auth import authenticate, login, logout 
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.core.mail import send_mail
+from django.utils.timezone import datetime, timedelta
+from uuid import uuid4
+from django.conf import settings
+from django.http import HttpResponse
 
 def home(request):
-  return render(
-    request, 'accounts/home.html'
-  )
-  
+    return render(request, 'accounts/home.html')
+
 def registration(request):
   registration_form = forms.RegistrationForm(request.POST or None)
   if registration_form.is_valid():
     try:
-      registration_form.save()
-      messages.success(request, 'ご入力いただいたメールアドレスに本会員登録用のメールを送信しました。')
+      user = registration_form.save()
+      
+      # ユーザの認証トークン作成
+      user_active_token = UserActiveTokens.objects.create(
+        r_user = user,
+        token = str(uuid4()),
+        expired_time = datetime.now() + timedelta(hours=5)
+      )
+      
+      # 認証メール送信
+      subject = '本会員登録のご案内'
+      message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com/accounts/active_user/{user_active_token.token}'
+      from_email = settings.DEFAULT_FORM_EMAIL
+      recipient_list = [user.email]
+      
+      send_mail(subject, message, from_email, recipient_list)
+      
+      message.success(request, 'ご入力いただいたメールアドレスに本会員登録用のメールを送信しました。')
       return redirect('accounts:home')
     except ValidationError as e:
-      registration_form.add_error('password', e) 
-  return render(
-    request, 'accounts/registration.html', context={
-      'registration_form':registration_form,
-    }
-  )
+      registration_form.add_error('password', e)
 
-def active_user(request, token):
-  user_active_token = UserActiveTokens.objects.active_user_using_token(token) 
   return render(
-    request, 'accounts/active_user.html'
-  )
+    request, 'accounts/registration.html',context={
+      'registration_form': registration_form,
+    }
+  )    
+      
+def active_user(request, token):
+  try:
+    user_active_token = UserActiveTokens.objects.get(token=token, expired_time__gt=datetime.now())
+    user = user_active_token.r_user
+    user.is_active = True
+    user.save()
+    messages.success(request, 'ユーザ認証が完了しました。ログインしてください。')
+    return redirect('accounts:login_page')
+  except UserActiveTokens.DoesNotExist:
+    messages.error(request, '無効な認証です。')
+    return redirect('accounts:home')
 
 def login_page(request): 
   login_form = forms.LoginForm(request.POST or None)
