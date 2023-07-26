@@ -24,12 +24,14 @@ def registration(request):
       user.save()
       
       # すでにユーザ認証トークンが存在する場合は再利用する
-      user_active_token, created = UserActiveTokens.objects.get_or_create(
-        r_user = user,
-        defaults = {
-          'token': str(uuid4()),
-          'expired_time':datetime.now() + timedelta(hours=5)
-        }
+      user_active_tokens = UserActiveTokens.objects.filter(r_user=user)
+      if user_active_tokens.exists():
+        user_active_token = user_active_tokens.first()
+      else:
+        user_active_token = UserActiveTokens.objects.create(
+        r_user=user,
+        token=str(uuid4()),
+        expired_time=datetime.now() + timedelta(hours=5)
       )
       
       # 認証メール送信
