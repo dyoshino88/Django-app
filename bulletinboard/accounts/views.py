@@ -19,13 +19,15 @@ def home(request):
   
 def registration(request):
   registration_form = forms.RegistrationForm(request.POST or None)
+  user_active_token = None 
+  
   if registration_form.is_valid():
     try:
       user = registration_form.save(commit=False)
       user.is_active = False
       user.save()
       
-      user_active_token = None 
+      
       
       user_active_tokens = UserActiveTokens.objects.filter(r_user=user)
       if user_active_tokens.exists():
@@ -53,6 +55,8 @@ def registration(request):
   return render(
   request, 'accounts/registration.html', context={
     'registration_form': registration_form,
+    # テンプレートで参照するためにコンテキストに追加
+    'user_active_token': user_active_token, 
         }
     )
 
