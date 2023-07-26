@@ -6,8 +6,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
-from django.core.mail import send_mail
-from django.utils.timezone import datetime, timedelta
 from django.conf import settings
 from django.http import HttpResponse
 
@@ -27,12 +25,6 @@ def registration(request):
       user_active_tokens = UserActiveTokens.objects.filter(r_user=user)
       if user_active_tokens.exists():
         user_active_token = user_active_tokens.first()
-      else:
-        user_active_token = UserActiveTokens.objects.create(
-        r_user=user,
-        token=str(uuid4()),
-        expired_time=datetime.now() + timedelta(hours=5)
-      )
       
       # 認証メール送信
       subject = '本会員登録のご案内'
