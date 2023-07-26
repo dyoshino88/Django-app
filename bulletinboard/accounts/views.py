@@ -25,7 +25,8 @@ def registration(request):
       user.is_active = False
       user.save()
       
-      # 既にユーザ認証トークンが存在する場合は再利用する
+      user_active_token = None 
+      
       user_active_tokens = UserActiveTokens.objects.filter(r_user=user)
       if user_active_tokens.exists():
         user_active_token = user_active_tokens.first()
