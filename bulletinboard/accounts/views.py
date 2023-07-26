@@ -27,8 +27,6 @@ def registration(request):
       user.is_active = False
       user.save()
       
-      
-      
       user_active_tokens = UserActiveTokens.objects.filter(r_user=user)
       if user_active_tokens.exists():
         user_active_token = user_active_tokens.first()
@@ -59,7 +57,7 @@ def registration(request):
     'user_active_token': user_active_token, 
         }
     )
-print("失敗しとるよ")
+  
 
 def active_user(request, token):
   user_active_token = UserActiveTokens.objects.active_user_using_token(token) 

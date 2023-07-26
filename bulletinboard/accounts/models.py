@@ -60,5 +60,5 @@ def publish_token(sender, instance, created, **kwargs):
         token=str(uuid4()),
         expired_time=datetime.now() + timedelta(hours=5)
       )
-      print(f'http://127.0.0.1:8000/accounts/active_user/{user_active_token.token}')
+  print(f'http://127.0.0.1:8000/accounts/active_user/{user_active_token.token}')
   
