@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
 from django.core.mail import send_mail
 from django.utils.timezone import datetime, timedelta
-from uuid import uuid4
 from django.conf import settings
 from django.http import HttpResponse
 
@@ -19,13 +18,18 @@ def registration(request):
   registration_form = forms.RegistrationForm(request.POST or None)
   if registration_form.is_valid():
     try:
-      user = registration_form.save()
+      user = registration_form.save(commit=False)
+      # ユーザを非アクティブにする
+      user.is_active = False
+      user.save()
       
-      # ユーザの認証トークン作成
-      user_active_token = UserActiveTokens.objects.create(
+      # すでにユーザ認証トークンが存在する場合は再利用する
+      user_active_token, created = UserActiveTokens.objects.get_or_create(
         r_user = user,
-        token = str(uuid4()),
-        expired_time = datetime.now() + timedelta(hours=5)
+        defaults = {
+          'token': str(uuid4()),
+          'expired_time':datetime.now() + timedelta(hours=5)
+        }
       )
       
       # 認証メール送信
