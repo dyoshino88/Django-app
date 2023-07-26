@@ -54,11 +54,12 @@ class UserActiveTokens(models.Model):
 def publish_token(sender, instance, created, **kwargs):
   if created:
     user_active_tokens = UserActiveTokens.objects.filter(r_user=instance)
+    print(f'http://127.0.0.1:8000/accounts/active_user/{user_active_token.token}')
     if not user_active_tokens.exists():
       user_active_token = UserActiveTokens.objects.create(
         r_user=instance,
         token=str(uuid4()),
         expired_time=datetime.now() + timedelta(hours=5)
       )
-  print(f'http://127.0.0.1:8000/accounts/active_user/{user_active_token.token}')
+  
   
