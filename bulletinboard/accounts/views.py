@@ -6,6 +6,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.core.mail import send_mail
+from django.conf import settings
+from django.urls import reverse
+from uuid import uuid4
+from datetime import datetime, timedelta
 
 def home(request):
   return render(
@@ -16,16 +21,39 @@ def registration(request):
   registration_form = forms.RegistrationForm(request.POST or None)
   if registration_form.is_valid():
     try:
-      registration_form.save()
-      messages.success(request, 'ご入力いただいたメールアドレスに本会員登録用のメールを送信しました。')
-      return redirect('accounts:home')
+      user = registration_form.save(commit=False)
+      user.is_active = False
+      user.save()
+      
+      # 既にユーザ認証トークンが存在する場合は再利用する
+      user_active_tokens = UserActiveTokens.objects.filter(r_user=user)
+      if user_active_tokens.exists():
+        user_active_token = user_active_tokens.first()
+      else:
+        user_active_token = UserActiveTokens.objects.create(
+          r_user=user,
+          token=str(uuid4()),
+          expired_time=datetime.now() + timedelta(hours=5)
+        )
+        
+        # 認証メールを送信
+        subject = '本会員登録のご案内'
+        activate_url = reverse('accounts:active_user', args=[user_active_token.token])
+        message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com{activate_url}'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = [user.email]
+        
+        send_mail(subject, message, from_email, recipient_list)
+        messages.success(request, 'ご入力いただいたメールアドレスに本会員登録用のメールを送信しました。')
+        return redirect('accounts:home')
     except ValidationError as e:
-      registration_form.add_error('password', e) 
+      registration_form.add_error('password', e)
+
   return render(
-    request, 'accounts/registration.html', context={
-      'registration_form':registration_form,
-    }
-  )
+  request, 'accounts/registration.html', context={
+    'registration_form': registration_form,
+        }
+    )
 
 def active_user(request, token):
   user_active_token = UserActiveTokens.objects.active_user_using_token(token) 
@@ -108,43 +136,4 @@ def my_error_handler(request, *args, **kw):
   error_html = debug.technical_500_response(request, *sys.exc_info()).content
   return HttpResponse(error_html)
 
-# 認証メール設定
-
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
-from django.core.mail import send_mail
-from django.utils.timezone import datetime, timedelta
-from uuid import uuid4
-from .models import UserActiveTokens
-from django.conf import settings
-from django.http import HttpResponse
-
-def user_registration_view(request):
-    if request.method == 'POST':
-        # フォームから入力されたデータを取得
-        username = request.POST.get('username', '')
-        email = request.POST.get('email', '')
-
-        # ユーザを作成 (パスワードの処理を追加することも可能)
-        user, created = User.objects.get_or_create(username=username, email=email)
-
-        # ユーザの認証トークンを作成
-        user_active_token = UserActiveTokens.objects.create(
-            r_user=user,
-            token=str(uuid4()),
-            expired_time=datetime.now() + timedelta(hours=5)
-        )
-
-        # 認証メールを送信
-        subject = '本会員登録のご案内'
-        message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com/accounts/active_user/{user_active_token.token}'
-        from_email = settings.DEFAULT_FROM_EMAIL
-        recipient_list = [email]
-
-        send_mail(subject, message, from_email, recipient_list)
-
-        return HttpResponse('メールを送信しました。')
-    
-    # GETリクエストまたは不正なフォーム送信の場合
-    return render(request, 'accounts/registration.html')
 
