@@ -6,7 +6,11 @@
   {% endfor %}
 {% endif %}
 <h2>掲示板一覧</h2>
+{% if user.is_authenticated %}
+    <!-- ログイン状態の場合のコンテンツ -->
 <p><a class="navbar-brand" href="{% url 'board:create_topic' %}">新しい掲示板を作る</a></p>
+    <!-- ログイン状態に応じたコンテンツを記述 -->
+{% endif %}
 <table class="table table-striped table-hover">
   <thread>
     <tr>
