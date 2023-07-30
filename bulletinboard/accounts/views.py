@@ -23,37 +23,30 @@ def registration(request):
   
   if registration_form.is_valid():
     try:
-      user = registration_form.save(commit=False)
-      user.is_active = False
+      user = registration_form.save()
       user.save()
       
-      user_active_tokens = UserActiveTokens.objects.filter(r_user=user)
-      if user_active_tokens.exists():
-        user_active_token = user_active_tokens.first()
-      else:
-        user_active_token = UserActiveTokens.objects.create(
-          r_user=user,
-          token=str(uuid4()),
-          expired_time=datetime.now() + timedelta(hours=5)
-        )
+      user_active_token = UserActiveTokens.objects.create(
+        r_user=user,
+        token=str(uuid4()),
+        expired_time=datetime.now() + timedelta(hours=5)
+      )
+      
+      subject = '本会員登録のご案内'
+      activate_url = reverse('accounts:active_user', args=[user_active_token.token])
+      message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com{activate_url}'
+      from_email = settings.DEFAULT_FROM_EMAIL
+      recipient_list = [user.email]
         
-        # 認証メールを送信
-        subject = '本会員登録のご案内'
-        activate_url = reverse('accounts:active_user', args=[user_active_token.token])
-        message = f'会員登録ありがとうございます。以下のURLをクリックされますとユーザー認証が完了しますので、完了後、ログインをお願い致します。https://dkoukan.com{activate_url}'
-        from_email = settings.DEFAULT_FROM_EMAIL
-        recipient_list = [user.email]
-        
-        send_mail(subject, message, from_email, recipient_list)
-        messages.success(request, 'ご入力いただいたメールアドレスに本会員登録用のメールを送信しました。')
-        return redirect('accounts:home')
+      send_mail(subject, message, from_email, recipient_list)
+      messages.success(request, 'ご入力いただいたメールアドレスに本会員登録用のメールを送信しました。')
+      return redirect('accounts:home')
     except ValidationError as e:
       registration_form.add_error('password', e)
 
   return render(
   request, 'accounts/registration.html', context={
     'registration_form': registration_form,
-    # テンプレートで参照するためにコンテキストに追加
     'user_active_token': user_active_token, 
         }
     )
@@ -75,13 +68,7 @@ def login_page(request):
       if r_user.is_active:
         login(request,r_user)
         messages.success(request, 'ログインに成功しました')
-        if 's1' in request.session:
-          s1 = request.session['s1']
-        else:
-          s1 = 'hello'
-          request.session['s1'] = s1
-        params = {'s1': s1}
-        return render(request,'accounts/home.html', params)
+        return render(request,'accounts/home.html')
       else:
         messages.warning(request, 'ユーザが無効です。')
     else:

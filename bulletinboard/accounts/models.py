@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 from django.contrib.auth.models import UserManager
 import os
 from django.contrib.auth.models import User
+from django.conf import settings
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -52,7 +53,7 @@ class UserActiveTokens(models.Model):
     
 @receiver(post_save, sender=User) 
 def publish_token(sender, instance, created, **kwargs):
-  if created:
+  if created and settings.DEBUG: # 開発環境のときのみ処理を行う
     user_active_tokens = UserActiveTokens.objects.filter(r_user=instance)
     if not user_active_tokens.exists():
       user_active_token = UserActiveTokens.objects.create(
