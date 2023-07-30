@@ -85,7 +85,7 @@ def login_page(request):
 def logout_page(request):
   logout(request)
   messages.success(request, 'ログアウトしました')
-  return redirect('accounts:home')
+  return redirect('/')
 
 @login_required 
 def edit_page(request):
