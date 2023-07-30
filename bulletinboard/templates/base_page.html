@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% block content %}
+{% if messages %} 
+  {% for message in messages %}
+    <div>{{ message.message }}</div>
+  {% endfor %}
+{% endif %}
+<div class="homepage">
+<div class="mtext">
+そのダンベル重すぎor軽すぎ？<br>
+誰かと交換して再利用！
+</div>
+</div>
+{% endblock %}

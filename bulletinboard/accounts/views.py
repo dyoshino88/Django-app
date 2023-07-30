@@ -12,10 +12,12 @@ from django.urls import reverse
 from uuid import uuid4
 from datetime import datetime, timedelta
 
+def base_page(request):
+  # 基本のページ処理
+  return render(request, 'base_page.html')
+
 def home(request):
-  return render(
-    request, 'accounts/home.html'
-  )
+  return render(request, 'accounts/home.html')
   
 def registration(request):
   registration_form = forms.RegistrationForm(request.POST or None)
