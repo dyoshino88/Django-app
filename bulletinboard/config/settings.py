@@ -93,6 +93,8 @@ MIDDLEWARE = [
 ]
 
 SESSION_ENGINE ='django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 604800  # 1 week in seconds
+
 
 ROOT_URLCONF = 'config.urls'
 
