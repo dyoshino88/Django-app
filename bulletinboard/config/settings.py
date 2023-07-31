@@ -240,6 +240,12 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 DEFAULT_FROM_EMAIL = 'yoshino0707dh@gmail.com'
 
+# デバッグモード時に全ての例外を表示する設定
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
     
     
 
