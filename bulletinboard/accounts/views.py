@@ -70,7 +70,19 @@ def login_page(request):
       if r_user.is_active:
         login(request,r_user)
         messages.success(request, 'ログインに成功しました')
-        return redirect('accounts:home')
+        
+        # ログイン後にセッションからメールアドレスを取得してリダイレクト
+        registered_email = request.session.get('registered_email', None)
+        if registered_email:
+          # セッションからメールアドレスを取得したら、セッションから削除する（不要になったため）
+          request.session.pop('registered_email')
+          
+          return redirect('accounts:home')  # 目的のページにリダイレクト
+        else:
+          return redirect('accounts:home')  # セッションにメールアドレスがなければ、通常のページにリダイレクト
+                 
+        
+        # return redirect('accounts:home')
       else:
         messages.warning(request, 'ユーザが無効です。')
     else:
