@@ -12,7 +12,11 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand title" href="/">ダンベル交換所</a>
+{% if user.is_authenticated %}
+  <a class="navbar-brand title" href="{% url 'accounts:home' %}">ダンベル交換所</a>
+{% else %}
+  <a class="navbar-brand title" href="/">ダンベル交換所</a>
+{% endif %}
 <div class="collapse navbar-collapse">
   <ul class="navbar-nav ml-auto">
     <li class="nav-item">

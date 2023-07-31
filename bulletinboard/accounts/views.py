@@ -70,7 +70,6 @@ def login_page(request):
       if r_user.is_active:
         login(request,r_user)
         messages.success(request, 'ログインに成功しました')
-        # return render(request,'accounts/home.html')
         return redirect('accounts:home')
       else:
         messages.warning(request, 'ユーザが無効です。')
