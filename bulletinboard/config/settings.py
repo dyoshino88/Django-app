@@ -92,6 +92,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 SESSION_COOKIE_AGE = 604800  # 1 week in seconds
+SESSION_SAVE_EVERY_REQUEST = True
 
 
 ROOT_URLCONF = 'config.urls'
