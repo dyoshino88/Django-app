@@ -35,4 +35,3 @@ class Texts(models.Model):
   class Meta:
     db_table = 'texts'
 
-# Create your models here.
