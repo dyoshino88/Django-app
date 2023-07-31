@@ -13,9 +13,9 @@ from uuid import uuid4
 from datetime import datetime, timedelta
 
 def base_page(request):
-  # 基本のページ処理
   return render(request, 'base_page.html')
 
+@login_required
 def home(request):
   return render(request, 'accounts/home.html')
   
