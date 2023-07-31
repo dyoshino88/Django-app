@@ -49,6 +49,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 SESSION_COOKIE_AGE = 604800  # 1 week in seconds
+# 修正ここから
+# サブドメイン全体でセッションクッキーを共有
+SESSION_COOKIE_DOMAIN = '.dkoukan.com'
+# 修正ここまで
+
 
 ROOT_URLCONF = 'config.urls'
 
