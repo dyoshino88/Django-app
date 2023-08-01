@@ -52,6 +52,7 @@ SESSION_COOKIE_AGE = 604800  # 1 week in seconds
 # 修正ここから
 # サブドメイン全体でセッションクッキーを共有
 SESSION_COOKIE_DOMAIN = '.dkoukan.com'
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 # 修正ここまで
 
 
