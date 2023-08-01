@@ -22,10 +22,10 @@ from accounts.views import error_page
 from accounts import views 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', views.base_page, name='base_page'), 
-    path('accounts/', include('accounts.urls')),
-    path('board/', include('board.urls')),
+    path('admin/',admin.site.urls),
+    path('',views.base_page, name='base_page'), 
+    path('accounts/',include('accounts.urls')),
+    path('board/',include('board.urls')),
 ]
 handler404 = error_page
 
