@@ -160,7 +160,11 @@ CSRF_TRUSTED_ORIGINS = ['https://dkoukan.com']
 
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY') 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+if IS_HEROKU_APP:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
