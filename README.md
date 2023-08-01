@@ -30,10 +30,10 @@
     <td> PostgreSQL </td> <td>DB設定はHeroku Postgres経由</td>
   </tr>
   <tr>
-    <td> HTML </td> <td>WEBアプリには必須</td>
+    <td> HTML </td> <td>フロント部分</td>
   </tr>
   <tr>
-    <td> CSS </td> <td>HTMLと同様</td>
+    <td> CSS </td> <td>フロント部分</td>
   </tr>
 </table>
 
