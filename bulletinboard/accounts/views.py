@@ -75,12 +75,7 @@ def login_page(request):
         request.session['user_id'] = r_user.id
         request.session['user_email'] = r_user.email
         
-        # クエリパラメーターからnextを取得
-        next_url = request.GET.get('next')
-        
-        # リダイレクト先をnext_urlに設定（デフォルトはaccounts:home）
-        redirect_url = next_url if next_url else reverse('accounts:home')
-        return redirect(redirect_url)
+        return redirect('accounts:home')
                 
         # 修正ここまで
         # return redirect('accounts:home')
