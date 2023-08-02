@@ -80,11 +80,10 @@ def login_page(request):
     }
   )
 
-@login_required
 def logout_page(request):
   logout(request)
   messages.success(request, 'ログアウトしました')
-  return redirect('/')
+  return redirect('base_page.html')
 
 @login_required 
 def edit_page(request):
