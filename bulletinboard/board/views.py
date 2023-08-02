@@ -24,9 +24,6 @@ def create_topic(request):
 
 def list_topics(request): 
   topics = Topics.objects.pick_all_topics()
-  # 修正ここから
-  request.session.get('s')
-  # 修正ここまで
   return render(
     request, 'board/list_topics.html', context={
       'topics': topics
