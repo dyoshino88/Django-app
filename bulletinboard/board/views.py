@@ -7,18 +7,10 @@ from django.http import Http404
 from django.core.cache import cache
 from django.http import JsonResponse
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def create_topic(request):
-  # 修正ここから
-  # ログインしているユーザー情報をセッションから取得
-  user_id = request.session.get('user_id', None)
-  user_email = request.session.get('user_email', None)
-  
-  # ユーザー情報が存在しない場合は、ログインページにリダイレクト
-  if not user_id or not user_email:
-    return redirect('accounts:login_page')
-  # 修正ここまで
-      
   create_topic_form = forms.CreateTopicForm(request.POST or None)
   if create_topic_form.is_valid():
     create_topic_form.instance.user = request.user
