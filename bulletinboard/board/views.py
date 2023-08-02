@@ -9,7 +9,6 @@ from django.http import JsonResponse
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 
-@login_required
 def create_topic(request):
   create_topic_form = forms.CreateTopicForm(request.POST or None)
   if create_topic_form.is_valid():
