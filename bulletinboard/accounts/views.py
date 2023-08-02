@@ -60,34 +60,58 @@ def active_user(request, token):
     request, 'accounts/active_user.html'
   )
 
-def login_page(request): 
-  login_form = forms.LoginForm(request.POST or None)
-  if login_form.is_valid():
-    email = login_form.cleaned_data.get('email')
-    password = login_form.cleaned_data.get('password')
-    r_user = authenticate(email=email, password=password)
-    if r_user:
-      if r_user.is_active:
-        login(request,r_user)
-        messages.success(request, 'ログインに成功しました')
-        # 修正ここから
-        # ログインしたユーザー情報をセッションに保存
-        request.session['user_id'] = r_user.id
-        request.session['user_email'] = r_user.email
-        
-        return redirect('accounts:home')
-                
-        # 修正ここまで
-        # return redirect('accounts:home')
-      else:
-        messages.warning(request, 'ユーザが無効です。')
+# def login_page(request): 
+#   login_form = forms.LoginForm(request.POST or None)
+#   if login_form.is_valid():
+#     email = login_form.cleaned_data.get('email')
+#     password = login_form.cleaned_data.get('password')
+#     r_user = authenticate(email=email, password=password)
+#     if r_user:
+#       if r_user.is_active:
+#         login(request,r_user)
+#         messages.success(request, 'ログインに成功しました')
+#         return redirect('accounts:home')
+#       else:
+#         messages.warning(request, 'ユーザが無効です。')
+#     else:
+#       messages.warning(request, 'メールアドレスまたはパスワードが違います')
+#   return render(
+#     request, 'accounts/login_page.html', context={
+#       'login_form':login_form,
+#     }
+#   )
+# 修正ここから
+from django.contrib.auth.views import LoginView
+
+def login_page(request):
+    if request.method == 'POST':
+        login_form = forms.LoginForm(request.POST)
+        if login_form.is_valid():
+            email = login_form.cleaned_data.get('email')
+            password = login_form.cleaned_data.get('password')
+            r_user = authenticate(email=email, password=password)
+            if r_user:
+                if r_user.is_active:
+                    login(request, r_user)
+                    messages.success(request, 'ログインに成功しました')
+                    return redirect('accounts:home')
+                else:
+                    messages.warning(request, 'ユーザが無効です。')
+            else:
+                messages.warning(request, 'メールアドレスまたはパスワードが違います')
     else:
-      messages.warning(request, 'メールアドレスまたはパスワードが違います')
-  return render(
-    request, 'accounts/login_page.html', context={
-      'login_form':login_form,
-    }
-  )
+        login_form = forms.LoginForm()
+
+    return LoginView.as_view(
+        template_name='accounts/login_page.html',
+        authentication_form=forms.LoginForm,
+        extra_context={
+            'login_form': login_form,
+        }
+    )(request)
+  # 修正ここまで
+
+
   
   
 
