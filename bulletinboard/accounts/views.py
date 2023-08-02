@@ -15,7 +15,6 @@ from datetime import datetime, timedelta
 def base_page(request):
   return render(request, 'base_page.html')
 
-@login_required
 def home(request):
   return render(request, 'accounts/home.html')
   
