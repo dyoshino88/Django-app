@@ -6,7 +6,7 @@ module.exports = {
   },
   purge: {
     enabled: false,
-    content: ['../**/templates/*.html', '../**/templates/**/*.html'],
+    content: ['../bulletinboard/templates/base.html', '../bulletinboard/templates/accounts/registration.html'],
   },
   theme: {
     extend: {},

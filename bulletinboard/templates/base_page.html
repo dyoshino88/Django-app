@@ -1,16 +1,110 @@
-{% extends "base.html" %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-{% block content %}
 {% if messages %} 
   {% for message in messages %}
     <div>{{ message.message }}</div>
   {% endfor %}
 {% endif %}
-<div class="homepage">
-<div class="mtext">
-そのダンベル重すぎor軽すぎ？<br>
-誰かと交換して再利用！
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% load static %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endcomment %}
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/style.min.css' %}" /> {% endcomment %}
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" href="{% static 'bulletinboard/favicon.ico' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<title>ダンベル交換所</title>
+</head>
+<body>
+<div class="bg-white pb-6 sm:pb-8 lg:pb-12">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8 flex flex-col">
+    <header class="mb-8 flex items-center justify-between py-4 md:py-8">
+      <!-- logo - start -->
+      {% if user.is_authenticated %}
+        <a href="{% url 'accounts:home' %}" class="inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
+        <img src="{% static 'bulletinboard/icon.jpeg' %}" alt="icon" class="h-auto w-6 text-indigo-500">
+        ダンベル交換所
+        </a>
+      {% else %}
+        <a href="/" class="inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
+        <img src="{% static 'bulletinboard/icon.jpeg' %}" alt="icon" class="h-auto w-6 text-indigo-500">
+        ダンベル交換所
+        </a>
+      {% endif %}
+      <!-- logo - end -->
+
+      <!-- nav - start -->
+      <nav class="hidden gap-12 lg:flex">
+        {% if user.is_authenticated %}
+          <a href="{% url 'board:list_topics' %}" class="text-lg font-semibold text-green-500">掲示板一覧</a>
+          <a href="{% url 'accounts:edit_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">アカウント情報の変更</a>
+          <a href="{% url 'accounts:logout_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">ログアウト</a>
+        {% else %}
+          <a href="{% url 'accounts:registration' %}" class="text-lg font-semibold text-green-500">会員登録</a>
+          <a href="{% url 'accounts:login_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">ログイン</a>
+          <a href="{% url 'board:list_topics' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">掲示板一覧</a>
+        {% endif %}
+      </nav>
+      <!-- nav - end -->
+
+      <!-- buttons - start -->
+
+      <div class="flex h-20 items-center p-6 lg:hidden">
+        <nav>
+          <button id="button" type="button" class="fixed top-6 right-6 z-10 lg:hidden">
+            <i id="bars" class="fa-solid fa-bars fa-2x"></i>
+            <i id="xmark" class="fa-solid fa-xmark fa-2x hidden text-gray-600"></i>
+          </button>
+          <ul id="menu" class="fixed top-0 left-0 z-0 w-full translate-x-full bg-gray-100 text-center text-xl font-bold text-white transition-all ease-linear">
+            {% if user.is_authenticated %}
+              <li class="p-3"><a href="{% url 'board:list_topics' %}" class="text-lg font-semibold text-green-500">掲示板一覧</a></li>
+              <li class="p-3"><a href="{% url 'accounts:edit_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">アカウント情報の変更</a></li>
+              <li class="p-3"><a href="{% url 'accounts:logout_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">ログアウト</a></li>
+            {% else %}
+              <li class="p-3"><a href="{% url 'accounts:registration' %}" class="text-lg font-semibold text-green-500">会員登録</a></li>
+              <li class="p-3"><a href="{% url 'accounts:login_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">ログイン</a></li>
+              <li class="p-3"><a href="{% url 'board:list_topics' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">掲示板一覧</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      <!-- buttons - end -->
+      {% block javascript %}
+        <script>
+          button.addEventListener('click', event => {
+            bars.classList.toggle('hidden')
+            xmark.classList.toggle('hidden')
+            menu.classList.toggle('translate-x-full')
+          });
+        </script>
+      {% endblock %} 
+    </header>
+
+    <section class="min-h-96 relative flex flex-1 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-gray-100 py-16 shadow-lg md:py-20 xl:py-48 z-20">
+      <!-- image - start -->
+      <img src="{% static 'bulletinboard/two-dumbells.jpg' %}" loading="lazy" alt="Photo by Fakurian Design" class="absolute inset-0 h-full w-full object-cover object-center" />
+      <!-- image - end -->
+
+      <!-- overlay - start -->
+      <div class="absolute inset-0 bg-white bg-opacity-50 mix-blend-screen"></div>
+      <!-- overlay - end -->
+
+
+      <!-- text start -->
+      <div class="relative flex flex-col items-center p-4 sm:max-w-xl">
+        <p class="mb-4 text-center text-lg font-bold text-black sm:text-xl md:mb-8">Time for a trade!</p>
+        <h1 class="mb-8 text-center text-4xl font-bold text-black sm:text-5xl md:mb-12 md:text-6xl drop-shadow-2xl">そのダンベル重すぎor軽すぎ？誰かと交換して再利用！</h1>
+
+        <div class="flex w-full flex-col gap-2.5 sm:flex-row sm:justify-center">
+          <a href="#" class="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">チャットルーム</a>
+
+          <a href="#" class="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">ご利用方法</a>
+        </div>
+      </div>
+      <!-- text end -->
+  </section>
+  </div>
 </div>
-</div>
-{% endblock %}
+</body>
+</html>

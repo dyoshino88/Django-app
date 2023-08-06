@@ -1,6 +1,4 @@
-{% extends "base.html" %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% extends "base_page.html" %}
 {% block content %}
 {% if messages %} 
   {% for message in messages %}
@@ -12,10 +10,4 @@
     <h1>ようこそ、{{ user.username }}さん！</h1>
     <!-- ログイン状態に応じたコンテンツを記述 -->
 {% endif %}
-<div class="homepage">
-<div class="mtext">
-そのダンベル重すぎor軽すぎ？<br>
-誰かと交換して再利用！
-</div>
-</div>
 {% endblock %}

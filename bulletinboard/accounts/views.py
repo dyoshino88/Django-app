@@ -12,6 +12,7 @@ from django.urls import reverse
 from uuid import uuid4
 from datetime import datetime, timedelta
 
+
 def base_page(request):
   return render(request, 'base_page.html')
 

@@ -1,48 +1,82 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'css/style.min.css' %}" />
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/style.min.css' %}" /> {% endcomment %}
+<script src="https://cdn.tailwindcss.com"></script>
 <link rel="icon" href="{% static 'bulletinboard/favicon.ico' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <title>ダンベル交換所</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-{% if user.is_authenticated %}
-  <a class="navbar-brand title text-red-600" href="{% url 'accounts:home' %}">ダンベル交換所</a>
-{% else %}
-  <a class="navbar-brand title" href="/">ダンベル交換所</a>
-{% endif %}
-<div class="collapse navbar-collapse">
-  <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'board:list_topics' %}">掲示板一覧</a>
-    </li>
-    {% if user.is_authenticated %} 
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'accounts:logout_page' %}">ログアウト</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'accounts:edit_page' %}">アカウント情報の変更</a> 
-    </li>
-    {% else %}
-    <li class="nav-item">
-      <a class="nav-link login" href="{% url 'accounts:login_page' %}">ログイン</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link registration" href="{% url 'accounts:registration' %}">会員登録</a>
-    </li>
-    {% endif %}
-  </ul>
+<div class="bg-white pb-6 sm:pb-8 lg:pb-12">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8 flex flex-col">
+    <header class="mb-8 flex items-center justify-between py-4 md:py-8">
+      <!-- logo - start -->
+      {% if user.is_authenticated %}
+        <a href="{% url 'accounts:home' %}" class="inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
+        <img src="{% static 'bulletinboard/icon.jpeg' %}" alt="icon" class="h-auto w-6 text-indigo-500">
+        ダンベル交換所
+        </a>
+      {% else %}
+        <a href="/" class="inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
+        <img src="{% static 'bulletinboard/icon.jpeg' %}" alt="icon" class="h-auto w-6 text-indigo-500">
+        ダンベル交換所
+        </a>
+      {% endif %}
+      <!-- logo - end -->
+
+      <!-- nav - start -->
+      <nav class="hidden gap-12 lg:flex">
+        {% if user.is_authenticated %}
+          <a href="{% url 'board:list_topics' %}" class="text-lg font-semibold text-green-500">掲示板一覧</a>
+          <a href="{% url 'accounts:edit_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">アカウント情報の変更</a>
+          <a href="{% url 'accounts:logout_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">ログアウト</a>
+        {% else %}
+          <a href="{% url 'accounts:registration' %}" class="text-lg font-semibold text-green-500">会員登録</a>
+          <a href="{% url 'accounts:login_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">ログイン</a>
+          <a href="{% url 'board:list_topics' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">掲示板一覧</a>
+        {% endif %}
+      </nav>
+      <!-- nav - end -->
+
+      <!-- buttons - start -->
+
+      <div class="flex h-20 items-center p-6 lg:hidden">
+        <nav>
+          <button id="button" type="button" class="fixed top-6 right-6 z-10 lg:hidden">
+            <i id="bars" class="fa-solid fa-bars fa-2x"></i>
+            <i id="xmark" class="fa-solid fa-xmark fa-2x hidden text-gray-600"></i>
+          </button>
+          <ul id="menu" class="fixed top-0 left-0 z-0 w-full translate-x-full bg-gray-100 text-center text-xl font-bold text-white transition-all ease-linear">
+            {% if user.is_authenticated %}
+              <li class="p-3"><a href="{% url 'board:list_topics' %}" class="text-lg font-semibold text-green-500">掲示板一覧</a></li>
+              <li class="p-3"><a href="{% url 'accounts:edit_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">アカウント情報の変更</a></li>
+              <li class="p-3"><a href="{% url 'accounts:logout_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">ログアウト</a></li>
+            {% else %}
+              <li class="p-3"><a href="{% url 'accounts:registration' %}" class="text-lg font-semibold text-green-500">会員登録</a></li>
+              <li class="p-3"><a href="{% url 'accounts:login_page' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">ログイン</a></li>
+              <li class="p-3"><a href="{% url 'board:list_topics' %}" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-green-500 active:text-green-500">掲示板一覧</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      <!-- buttons - end -->
+      {% block javascript %}
+        <script>
+          button.addEventListener('click', event => {
+            bars.classList.toggle('hidden')
+            xmark.classList.toggle('hidden')
+            menu.classList.toggle('translate-x-full')
+          });
+        </script>
+      {% endblock %} 
+    </header>
+  </div>
 </div>
-</nav>
 {% block content %}{% endblock %}
-{% block javascript %}{% endblock %}
 </body>
 </html>
