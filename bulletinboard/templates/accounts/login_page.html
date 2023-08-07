@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% comment %} {% extends "base.html" %}
 {% block content %}
 {% if messages %}
   {% for message in messages %}
@@ -9,5 +12,92 @@
 {% csrf_token %}
 {{ login_form.as_p }}
 <input type="submit" value="ログイン">
+</form>
+{% endblock %} {% endcomment %}
+
+
+
+{% comment %} {% block content %}
+<p>Bootstrap動作テスト</p>
+  <div class="alert alert-primary" role="alert">alertクラス alert-primaryクラス確認</div>
+ 
+  <div class="bd-example">
+  <button type="button" class="btn btn-lg btn-danger" data-bs-toggle="popover" title="" data-bs-content="吹き出しの様に表示されます。" data-bs-original-title="ポップオーバータイトル" aria-describedby="popover711666">
+    ポップオーバー表示確認
+  </button>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+  <script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl)
+  })
+  </script>
+{% endblock javascripts %} {% endcomment %}
+
+
+
+
+
+{% comment %} {% block content %}
+  {% if messages %}
+    <div class="container mt-4">
+      {% for message in messages %}
+        <div class="alert alert-info">{{ message.message }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+  <div class="container mt-4">
+    <form method="POST" class="mb-4"> <!-- mb-4: フォームの下にマージンを追加 -->
+      {% csrf_token %}
+      <div class="form-group">
+        {{ login_form.email.label_tag }} <!-- メールアドレスのラベルを表示 -->
+        {{ login_form.email }} <!-- メールアドレスの入力フィールドを表示 -->
+      </div>
+      <div class="form-group">
+        {{ login_form.password.label_tag }} <!-- パスワードのラベルを表示 -->
+        {{ login_form.password }} <!-- パスワードの入力フィールドを表示 -->
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">ログイン</button>
+      <!-- btn-block: ボタンをブロック要素にして幅いっぱいに表示 -->
+    </form>
+  </div>
+{% endblock %} {% endcomment %}
+
+{% block content %}
+<style>
+  /* メールアドレスとパスワードの入力欄の幅を調整 */
+.form-control {
+  max-width: 500px; /* 好みに合わせて適切な幅に調整してください */
+}
+
+/* ログインボタンのスタイル */
+.btn-login {
+  background-color: #8cf49c;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.btn-login:hover {
+  background-color: #24ec4c; /* マウスオーバー時の背景色 */
+}
+</style>
+  
+<form method="POST" class="mt-4">
+  {% csrf_token %}
+  <div class="form-group">
+    {{ login_form.email.label_tag }} <!-- メールアドレスのラベルを表示 -->
+    {{ login_form.email|add_class:"form-control" }} <!-- メールアドレスの入力フィールドにクラスを追加 -->
+  </div>
+  <div class="form-group">
+    {{ login_form.password.label_tag }} <!-- パスワードのラベルを表示 -->
+    {{ login_form.password|add_class:"form-control" }} <!-- パスワードの入力フィールドにクラスを追加 -->
+  </div>
+  <button type="submit" class="btn-login mt-3">ログイン</button>
 </form>
 {% endblock %}
