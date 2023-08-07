@@ -4,7 +4,8 @@
 
 # DEMO
 
-![スクリーンショット 2023-06-30 155302](https://github.com/dyoshino88/Django-app/assets/130971236/821c04cd-5d0e-4ced-9a98-d11b6716cfea)
+![FireShot Capture 025 - ダンベル交換所 - dkoukan com](https://github.com/dyoshino88/bulletinboard/assets/130971236/aa8a11dc-df02-4b06-a0ab-9a7d7a420a35)
+
 
 # Features
 ダンベルをユーザー間で交換できる掲示板<br>
