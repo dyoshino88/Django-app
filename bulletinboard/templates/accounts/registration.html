@@ -1,9 +1,55 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% block content %}
-<form method="POST">
-{% csrf_token %}
-{{ registration_form.as_p }}
-<input type = "submit" value="登録">
-</form>
+
+<style>
+    /* 入力欄の幅を調整 */
+  .form-control {
+    max-width: 500px; /* 適切な幅に調整 */
+  }
+
+  /* フォーム間のスペース */
+  .form-group {
+    margin-top: 1%;
+  }
+  
+  /* ボタンのスタイル */
+  .btn-registration {
+    background-color: #8cf49c;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .btn-registration:hover {
+    background-color: #24ec4c; /* マウスオーバー時の背景色 */
+  }
+  </style>
+    
+  <form method="POST" class="mt-4">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ registration_form.username.label_tag }} <!-- ラベルを表示 -->
+      {{ registration_form.username|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
+    </div>
+    <div class="form-group">
+      {{ registration_form.date_of_birth.label_tag }} <!-- ラベルを表示 -->
+      {{ registration_form.date_of_birth|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
+    </div>
+    <div class="form-group">
+      {{ registration_form.email.label_tag }} <!-- ラベルを表示 -->
+      {{ registration_form.email|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
+    </div>
+    <div class="form-group">
+      {{ registration_form.password.label_tag }} <!-- ラベルを表示 -->
+      {{ registration_form.password|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
+    </div>
+    <div class="form-group">
+        {{ registration_form.reenter_password.label_tag }} <!-- ラベルを表示 -->
+        {{ registration_form.reenter_password|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
+    </div>
+    <button type="submit" class="btn-registration mt-3">登録</button>
+  </form>
 {% endblock %}

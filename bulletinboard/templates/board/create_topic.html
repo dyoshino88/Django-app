@@ -1,9 +1,40 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 {% block content %}
 <h2>掲示板を作りましょう</h2>
-<form method="POST">
-{% csrf_token %}
-{{ create_topic_form.as_p }}
-<input type = "submit" value="新規作成">
-</form>
+
+<style>
+    /* 入力欄の幅を調整 */
+  .form-control {
+    max-width: 500px; /* 適切な幅に調整 */
+  }
+
+  /* フォーム間のスペース */
+  .form-group {
+    margin-top: 1%;
+  }
+  
+  /* ボタンのスタイル */
+  .btn-create_topic {
+    background-color: #8cf49c;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .btn-create_topic:hover {
+    background-color: #24ec4c; /* マウスオーバー時の背景色 */
+  }
+  </style>
+    
+  <form method="POST" class="mt-4">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ create_topic_form.title.label_tag }} <!-- ラベルを表示 -->
+      {{ create_topic_form.title|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
+    </div>
+    <button type="submit" class="btn-create_topic mt-3">投稿</button>
+  </form>
 {% endblock %}

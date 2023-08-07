@@ -1,9 +1,38 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 {% block content %}
 <h2>掲示板を削除できます</h2>
-<form method="POST">
+{% comment %} <form method="POST">
 {% csrf_token %}
 {{ delete_topic_form.as_p }}
 <input type = "submit" value="削除">
-</form>
+</form> {% endcomment %}
+
+
+<style>
+    /* 入力欄の幅を調整 */
+  .form-control {
+    max-width: 500px; /* 適切な幅に調整 */
+  }
+
+  /* ボタンのスタイル */
+  .btn-delete_topic {
+    background-color: #8cf49c;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .btn-delete_topic:hover {
+    background-color: #24ec4c; /* マウスオーバー時の背景色 */
+  }
+  </style>
+    
+  <form method="POST" class="mt-4">
+    {% csrf_token %}
+    <button type="submit" class="btn-delete_topic mt-3">削除</button>
+  </form>
+
 {% endblock %}

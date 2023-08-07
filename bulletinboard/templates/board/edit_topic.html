@@ -1,10 +1,48 @@
 {% extends "base.html" %}
+{% load widget_tweaks %}
 {% block content %}
-<h2>掲示板を編集できます</h2>
-<form method="POST">
-{% csrf_token %}
-{{ edit_topic_form.as_p }}
-<input type = "submit" value="更新">
-</form>
-<p><a class = "navbar-brand" href="{% url 'board:delete_topic' id=id %}">削除</a></p>
+<h2>掲示板のタイトル編集、削除ができます</h2>
+
+<style>
+    /* 入力欄の幅を調整 */
+  .form-control {
+    max-width: 500px; /* 適切な幅に調整 */
+  }
+  
+  /* フォーム間のスペース */
+  .form-group {
+    margin-top: 1%;
+  }
+  
+  /* ボタンのスタイル */
+  .btn-edit_topic {
+    background-color: #8cf49c;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .btn-edit_topic:hover {
+    background-color: #24ec4c; /* マウスオーバー時の背景色 */
+  }
+
+  .delete_topic {
+    margin-top: 2%;
+  }
+
+  </style>
+    
+  <form method="POST" class="mt-4">
+    {% csrf_token %}
+    <div class="form-group">
+      {{ edit_topic_form.title.label_tag }} <!-- ラベルを表示 -->
+      {{ edit_topic_form.title|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
+    </div>
+    <button type="submit" class="btn-edit_topic mt-3">更新</button>
+  </form>
+  <div class="delete_topic">
+    <a href="{% url 'board:delete_topic' id=id %}">削除</a>
+    </div>
 {% endblock %}
