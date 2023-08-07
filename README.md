@@ -4,7 +4,8 @@
 
 # DEMO
 
-![FireShot Capture 025 - ダンベル交換所 - dkoukan com](https://github.com/dyoshino88/bulletinboard/assets/130971236/aa8a11dc-df02-4b06-a0ab-9a7d7a420a35)
+![FireShot Capture 025 - ダンベル交換所 - dkoukan com](https://github.com/dyoshino88/bulletinboard/assets/130971236/8ed13045-0fd8-495d-8dd6-f5cd6f5fadc2)
+
 
 
 # Features
