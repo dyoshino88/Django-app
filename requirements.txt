@@ -13,5 +13,6 @@ virtualenv==20.23.0
 whitenoise==6.5.0
 django-environ~=0.4.5
 django-sendgrid-v5~=1.1.1
+django-widget-tweaks==1.4.12
 
 
