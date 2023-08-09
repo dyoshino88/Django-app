@@ -64,12 +64,12 @@
       {{ post_text_form.text|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
     </div>
     <input type = "button" value="保存" id="save_text">
-    <button type="submit" class="btn-post_text mt-3">テキスト送信</button>
+    <input type="submit" class="btn-post_text mt-3" value="テキスト送信">
   </form>
 </div>
 {% endif %}
 {% endblock %}
-{% block javascript %}
+{% block ajax_javascript %}
 <script>
 $("#save_text").click(function(){
   var text = $("#id_text").val();

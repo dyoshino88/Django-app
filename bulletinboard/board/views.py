@@ -82,12 +82,15 @@ def post_texts(request, topic_id):
     }
   )
 
-def save_text(request: HttpRequest):
+def save_text(request):
     if request.META.get('HTTP_X_REQUESTED_WITH') == 'XMLHttpRequest':
         text = request.GET.get('text')
         topic_id = request.GET.get('topic_id')
         if text and topic_id:
             cache.set(f'saved_text-topic_id={topic_id}-user_id={request.user.id}', text)
             return JsonResponse({'message': '投稿が一時保存されました'})
-    return JsonResponse({}, status=400)
+    else:
+      return JsonResponse({'message': '無効なリクエストです'})
+      
+  
 
