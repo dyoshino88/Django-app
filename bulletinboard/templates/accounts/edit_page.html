@@ -40,7 +40,7 @@
 
 </style>
   
-<form method="POST" class="mt-4">
+<form method="POST" class="mt-4" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="form-group">
     {{ edit_form.username.label_tag }} <!-- ラベルを表示 -->
