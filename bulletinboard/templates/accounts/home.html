@@ -1,10 +1,5 @@
 {% extends "base_page.html" %}
 {% block content %}
-{% if messages %} 
-  {% for message in messages %}
-    <div>{{ message.message }}</div>
-  {% endfor %}
-{% endif %}
 {% if user.is_authenticated %}
     <!-- ログイン状態の場合のコンテンツ -->
     <h1>ようこそ、{{ user.username }}さん！</h1>
