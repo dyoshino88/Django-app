@@ -91,6 +91,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 if IS_HEROKU_APP:
     DATABASES = {
         "default": dj_database_url.config(
+            default=os.environ.get("HEROKU_POSTGRESQL_RED_URL"),
             conn_max_age=600,
             conn_health_checks=True,
             ssl_require=True,
