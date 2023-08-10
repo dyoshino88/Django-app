@@ -43,10 +43,10 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # 下記追加
-    'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     # 下記追加
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -55,15 +55,15 @@ MIDDLEWARE = [
 SESSION_COOKIE_AGE = 604800  # 1 week in seconds
 
 # GPTセッションキャッシュバックエンド設定
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'my_cache_table',
-    }
-}
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#         'LOCATION': 'my_cache_table',
+#     }
+# }
 
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"  # キャッシュバックエンドを使用する設定
-SESSION_CACHE_ALIAS = "default"  # 上記で定義したキャッシュバックエンドのエイリアスを指定
+# SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"  # キャッシュバックエンドを使用する設定
+# SESSION_CACHE_ALIAS = "default"  # 上記で定義したキャッシュバックエンドのエイリアスを指定
 # GPTセッションキャッシュバックエンド設定ここまで
 
 

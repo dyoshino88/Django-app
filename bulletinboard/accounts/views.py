@@ -69,6 +69,8 @@ def login_page(request):
     if r_user:
       if r_user.is_active:
         login(request,r_user)
+        # セッション内容表示下記1行追加
+        print(request.session.items()) 
         messages.success(request, 'ログインに成功しました')
         return redirect('accounts:home')
       else:
