@@ -54,7 +54,7 @@ SESSION_COOKIE_AGE = 604800  # 1 week in seconds
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'django_session',
+        'LOCATION': 'cache',
     }
 }
 
