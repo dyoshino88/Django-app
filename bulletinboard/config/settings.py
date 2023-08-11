@@ -16,10 +16,9 @@ SECRET_KEY = os.environ.get(
 IS_HEROKU_APP = "DYNO" in os.environ and not "CI" in os.environ
 
 
-# if not IS_HEROKU_APP:
-    # DEBUG = True
+if not IS_HEROKU_APP:
+    DEBUG = True
 
-DEBUG = True
 
 if IS_HEROKU_APP:
     ALLOWED_HOSTS = ["*"]
@@ -44,31 +43,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    # 下記追加
-    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 下記追加
-    # 'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-SESSION_COOKIE_AGE = 604800  # 1 week in seconds
-
-# GPTセッションキャッシュバックエンド設定
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-#         'LOCATION': 'my_cache_table',
-#     }
-# }
-
-# SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"  # キャッシュバックエンドを使用する設定
-# SESSION_CACHE_ALIAS = "default"  # 上記で定義したキャッシュバックエンドのエイリアスを指定
-# GPTセッションキャッシュバックエンド設定ここまで
-
-
+SESSION_COOKIE_AGE = 604800  
 
 ROOT_URLCONF = 'config.urls'
 
