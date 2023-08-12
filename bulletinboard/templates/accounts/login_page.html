@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 
+{% if messages %} 
+  {% for message in messages %}
+    <div>{{ message.message }}</div>
+  {% endfor %}
+{% endif %}
+
 {% block content %}
 <style>
   /* 入力欄の幅を調整 */
