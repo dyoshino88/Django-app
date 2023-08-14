@@ -34,15 +34,10 @@
       {{ registration_form.username.label_tag }} <!-- ラベルを表示 -->
       {{ registration_form.username|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
     </div>
-    {% comment %} 以下追加 {% endcomment %}
-    {{ form.birthday }}
     <div class="form-group">
       {{ registration_form.date_of_birth.label_tag }} <!-- ラベルを表示 -->
-      <input type="date">
+      <input type="date" name="date_of_birth" class="form-control">
       {% comment %} {{ registration_form.date_of_birth|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 --> {% endcomment %}
-      {% comment %} {{ registration_form.date_of_birth.day.widget|add_class:"form-select" }}
-      {{ registration_form.date_of_birth.month.widget|add_class:"form-select" }}
-      {{ registration_form.date_of_birth.year.widget|add_class:"form-select" }} {% endcomment %}
     </div>
     <div class="form-group">
       {{ registration_form.email.label_tag }} <!-- ラベルを表示 -->
