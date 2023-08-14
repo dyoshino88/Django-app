@@ -36,8 +36,7 @@
     </div>
     <div class="form-group">
       {{ registration_form.date_of_birth.label_tag }} <!-- ラベルを表示 -->
-      <input type="date" name="date_of_birth" class="form-control">
-      {% comment %} {{ registration_form.date_of_birth|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 --> {% endcomment %}
+      <input type="date" name="date_of_birth" class="form-control"> <!-- 入力フィールドにクラスを追加,カレンダー表示 -->
     </div>
     <div class="form-group">
       {{ registration_form.email.label_tag }} <!-- ラベルを表示 -->
