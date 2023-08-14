@@ -38,6 +38,7 @@
     {{ form.birthday }}
     <div class="form-group">
       {{ registration_form.date_of_birth.label_tag }} <!-- ラベルを表示 -->
+      <input type="date">
       {% comment %} {{ registration_form.date_of_birth|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 --> {% endcomment %}
       {% comment %} {{ registration_form.date_of_birth.day.widget|add_class:"form-select" }}
       {{ registration_form.date_of_birth.month.widget|add_class:"form-select" }}
