@@ -2,7 +2,7 @@ from django import forms
 from .models import User
 from django.contrib.auth.password_validation import validate_password
 # 以下追加
-from django.contrib.admin.widgets import AdminDateWidget
+from django.forms.widgets import SelectDateWidget
 
 class RegistrationForm(forms.ModelForm):
   username = forms.CharField(label='ユーザーネーム')
