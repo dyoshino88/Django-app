@@ -6,12 +6,13 @@ from django.forms.widgets import SelectDateWidget
 
 class RegistrationForm(forms.ModelForm):
   username = forms.CharField(label='ユーザーネーム')
-  date_of_birth = forms.DateField(label='誕生日')
+  date_of_birth = forms.DateField(
+    label='誕生日',
+    widget=SelectDateWidget(years=range(1900, 2023)),
+    )
   email = forms.EmailField(label='メールアドレス')
   password = forms.CharField(label='パスワード', widget=forms.PasswordInput())
   reenter_password = forms.CharField(label='パスワード再入力', widget=forms.PasswordInput())
-  # 以下追加
-  birthday = forms.DateField(widget=forms.SelectDateWidget())
 
   class Meta():
     model = User
