@@ -11,6 +11,8 @@ from django.conf import settings
 from django.urls import reverse
 from uuid import uuid4
 from datetime import datetime, timedelta
+# 以下1行追加
+from .forms import RegistrationForm
 
 
 def base_page(request):

@@ -34,6 +34,8 @@
       {{ registration_form.username.label_tag }} <!-- ラベルを表示 -->
       {{ registration_form.username|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
     </div>
+    {% comment %} 以下追加 {% endcomment %}
+    {{ form.birthday }}
     <div class="form-group">
       {{ registration_form.date_of_birth.label_tag }} <!-- ラベルを表示 -->
       {{ registration_form.date_of_birth|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->

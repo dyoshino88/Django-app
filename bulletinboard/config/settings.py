@@ -155,7 +155,8 @@ AUTH_USER_MODEL = 'accounts.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = ['https://dkoukan.com']
 
-SECURE_SSL_REDIRECT = True
+if IS_HEROKU_APP:
+    SECURE_SSL_REDIRECT = True
 
 SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY') 
 

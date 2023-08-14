@@ -1,6 +1,8 @@
 from django import forms
 from .models import User
 from django.contrib.auth.password_validation import validate_password
+# 以下追加
+from django.contrib.admin.widgets import AdminDateWidget
 
 class RegistrationForm(forms.ModelForm):
   username = forms.CharField(label='ユーザーネーム')
@@ -8,6 +10,8 @@ class RegistrationForm(forms.ModelForm):
   email = forms.EmailField(label='メールアドレス')
   password = forms.CharField(label='パスワード', widget=forms.PasswordInput())
   reenter_password = forms.CharField(label='パスワード再入力', widget=forms.PasswordInput())
+  # 以下追加
+  birthday = forms.DateField(widget=forms.SelectDateWidget())
 
   class Meta():
     model = User
