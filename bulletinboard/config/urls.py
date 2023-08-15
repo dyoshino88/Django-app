@@ -27,6 +27,5 @@ urlpatterns = [
     path('accounts/',include('accounts.urls')),
     path('board/',include('board.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-handler404 = error_page
 
 
