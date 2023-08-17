@@ -88,16 +88,18 @@ def logout_page(request):
 
 @login_required 
 def edit_page(request):
-  edit_form = forms.UserEditForm(
-    request.POST or None, 
-    request.FILES or None, 
-    instance = request.user
-    )
-  if edit_form.is_valid():
-    messages.success(request, '更新されました')
-    edit_form.save()
+  user = request.user
+  
+  if request.method == 'POST':
+    edit_form = forms.UserEditForm(request.POST or None, request.FILES or None, instance = user)
+    if edit_form.is_valid():
+      messages.success(request, '更新されました')
+      edit_form.save()
+  else:
+    edit_form = forms.UserEditForm(instance=user)
   return render(request, 'accounts/edit_page.html', context={
       'edit_form': edit_form,
+      'user': user,
   })
   
 @login_required
