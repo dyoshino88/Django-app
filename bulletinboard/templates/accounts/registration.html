@@ -30,6 +30,17 @@
     
   <form method="POST" class="mt-4">
     {% csrf_token %}
+    {% if registration_form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for field, errors in registration_form.errors.items %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
     <div class="form-group">
       {{ registration_form.username.label_tag }} <!-- ラベルを表示 -->
       {{ registration_form.username|add_class:"form-control" }} <!-- 入力フィールドにクラスを追加 -->
