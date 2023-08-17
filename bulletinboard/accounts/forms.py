@@ -19,6 +19,12 @@ class RegistrationForm(forms.ModelForm):
     reenter_password = cleaned_data['reenter_password']
     if password != reenter_password:
       raise forms.ValidationError('パスワードが違います。再度入力してください。')
+    
+    # パスワードのバリデーション
+    try:
+      validate_password(password, self.instance)
+    except forms.ValidationError as error:
+      self.add_error('password', error)
 
   def save(self, commit=False):
     r_user = super().save(commit=False)
