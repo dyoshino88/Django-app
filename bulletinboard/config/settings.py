@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-SESSION_COOKIE_AGE = 604800  
+SESSION_COOKIE_AGE = 86400  
 
 ROOT_URLCONF = 'config.urls'
 
